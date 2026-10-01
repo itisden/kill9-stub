@@ -1,0 +1,428 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex" />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2032%2032'%3E%3Crect%20width='32'%20height='32'%20rx='7'%20fill='%236c8161'/%3E%3Cpath%20d='M8%208h6v6H8zM8%2018h6v6H8zM18%2018h6v6h-6z'%20fill='%23f7f7f0'/%3E%3C/svg%3E" />
+    <meta
+      name="description"
+      content="Our website is under construction."
+    />
+    <title>In the making — Coming soon</title>
+    <style>
+      :root {
+        color-scheme: light dark;
+        --paper: #f7f7f0;
+        --ink: #303a32;
+        --muted: #697264;
+        --accent: #6c8161;
+        --crane: #859a74;
+        --crane-edge: #526b48;
+        --crane-light: #aebc9c;
+        --horizon: #e9eddf;
+        --cloud: #edf0e7;
+        --building: #e1e5d9;
+        --building-side: #cbd4c2;
+        --building-top: #eff1e9;
+        --window: #bbc8b0;
+        --window-dark: #9aaa90;
+        --ground: #cbd3c1;
+        --leaf: #8da17d;
+        --leaf-dark: #637b57;
+        --load: #a5b795;
+        --load-side: #8c9f7c;
+        --load-top: #bdcbb0;
+      }
+
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --paper: #1b2421;
+          --ink: #e6e9df;
+          --muted: #a4afa0;
+          --accent: #b5c6a1;
+          --crane: #8da77c;
+          --crane-edge: #b5c6a1;
+          --crane-light: #b4c6a4;
+          --horizon: #25352d;
+          --cloud: #293a31;
+          --building: #3b4c3e;
+          --building-side: #2c3e32;
+          --building-top: #52634c;
+          --window: #6c8260;
+          --window-dark: #536b49;
+          --ground: #465840;
+          --leaf: #78966a;
+          --leaf-dark: #526f47;
+          --load: #9db48c;
+          --load-side: #7c976d;
+          --load-top: #bbcda9;
+        }
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        min-height: 100svh;
+        display: flex;
+        flex-direction: column;
+        background: var(--paper);
+        color: var(--ink);
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      ::selection {
+        background: var(--accent);
+        color: var(--paper);
+      }
+
+      [hidden] {
+        display: none !important;
+      }
+
+      .main {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding-block: clamp(40px, 8svh, 88px);
+      }
+
+      .intro {
+        position: relative;
+        z-index: 1;
+        padding-inline: 24px;
+        text-align: center;
+        animation: arrive 900ms ease-out both;
+      }
+
+      .eyebrow {
+        margin: 0 0 22px;
+        color: var(--muted);
+        font-size: 10px;
+        font-weight: 500;
+        line-height: 1.6;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+      }
+
+      h1 {
+        margin: 0;
+        font-size: clamp(46px, 5.6vw, 80px);
+        font-weight: 450;
+        line-height: 1.06;
+        letter-spacing: -0.055em;
+      }
+
+      h1 em {
+        display: block;
+        color: var(--accent);
+        font-family: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Georgia, serif;
+        font-weight: 400;
+        letter-spacing: -0.055em;
+      }
+
+      .scene {
+        width: min(1040px, 92%);
+        margin: 28px 0 0;
+        animation: arrive 1200ms 180ms ease-out both;
+      }
+
+      .scene svg {
+        display: block;
+        width: 100%;
+        height: auto;
+        max-height: 43svh;
+        overflow: visible;
+      }
+
+      .motion-control {
+        position: fixed;
+        right: clamp(16px, 3vw, 40px);
+        bottom: clamp(16px, 3vw, 32px);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 44px;
+        height: 44px;
+        padding: 12px;
+        border: 0;
+        border-radius: 50%;
+        background: transparent;
+        color: var(--muted);
+        cursor: pointer;
+        transition: color 180ms ease, background-color 180ms ease;
+      }
+
+      .motion-control:hover {
+        background: var(--horizon);
+        color: var(--ink);
+      }
+
+      .motion-control:focus-visible {
+        outline: 2px solid var(--accent);
+        outline-offset: 4px;
+      }
+
+      .motion-control svg {
+        width: 18px;
+        height: 18px;
+      }
+
+      .play-icon,
+      [data-motion="paused"] .pause-icon {
+        display: none;
+      }
+
+      [data-motion="paused"] .play-icon {
+        display: block;
+      }
+
+      .cloud-one {
+        animation: drift 28s ease-in-out infinite alternate;
+      }
+
+      .cloud-two {
+        animation: drift 34s -12s ease-in-out infinite alternate-reverse;
+      }
+
+      .trolley {
+        transform: translateX(40px);
+        animation: trolley-travel 18s ease-in-out infinite;
+      }
+
+      .hoist-cable {
+        transform-origin: 630px 116px;
+        animation: cable-lift 18s ease-in-out infinite;
+      }
+
+      .hoist-load {
+        animation: load-lift 18s ease-in-out infinite;
+      }
+
+      .load-sway {
+        transform-origin: 630px 244px;
+        animation: sway 4.5s ease-in-out infinite;
+      }
+
+      .plant-sway {
+        transform-origin: 868px 377px;
+        animation: plant-sway 6s ease-in-out infinite;
+      }
+
+      [data-motion="paused"] .scene svg * {
+        animation-play-state: paused !important;
+      }
+
+      @keyframes arrive {
+        from { opacity: 0; transform: translateY(12px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+
+      @keyframes drift {
+        from { transform: translateX(-12px); }
+        to { transform: translateX(18px); }
+      }
+
+      /* Travel starts after the load clears the roof, then returns before lowering. */
+      @keyframes trolley-travel {
+        0%, 27%, 100% { transform: translateX(40px); }
+        45%, 58% { transform: translateX(-125px); }
+        76% { transform: translateX(40px); }
+      }
+
+      @keyframes cable-lift {
+        0%, 9%, 94%, 100% { transform: scaleY(1); }
+        27%, 76% { transform: scaleY(0.296875); }
+      }
+
+      @keyframes load-lift {
+        0%, 9%, 94%, 100% { transform: translateY(0); }
+        27%, 76% { transform: translateY(-90px); }
+      }
+
+      @keyframes sway {
+        0%, 100% { transform: rotate(-1deg); }
+        50% { transform: rotate(1deg); }
+      }
+
+      @keyframes plant-sway {
+        0%, 100% { transform: rotate(-1.5deg); }
+        50% { transform: rotate(1.5deg); }
+      }
+
+      @media (max-width: 600px) {
+        .main { padding-block: 40px; }
+        .eyebrow { margin-bottom: 20px; font-size: 9px; letter-spacing: 0.17em; }
+        h1 { font-size: clamp(42px, 10vw, 60px); }
+        .scene { width: 100%; margin: 36px 0 0; overflow: hidden; }
+        .scene svg { width: 145%; max-width: none; max-height: none; margin-left: -24%; }
+      }
+
+      @media (max-height: 740px) and (min-width: 601px) {
+        .main { padding-block: 28px; }
+        .eyebrow { margin-bottom: 16px; }
+        h1 { font-size: clamp(46px, 5.4vw, 66px); }
+        .scene svg { max-height: 39svh; }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        *, *::before, *::after {
+          animation: none !important;
+          transition: none !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="main">
+      <div class="intro">
+        <p class="eyebrow">This site is under construction</p>
+        <h1>Good things<br /><em>are taking shape.</em></h1>
+      </div>
+
+      <figure class="scene" aria-hidden="true">
+        <svg viewBox="0 0 1100 430" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <pattern id="building-windows" x="432" y="299" width="34" height="32" patternUnits="userSpaceOnUse">
+              <rect width="12" height="17" rx="1" fill="var(--window)" />
+            </pattern>
+            <pattern id="small-windows" x="304" y="329" width="28" height="28" patternUnits="userSpaceOnUse">
+              <rect width="10" height="13" rx="1" fill="var(--window)" />
+            </pattern>
+          </defs>
+
+          <!-- A quiet skyline, kept behind the working site. -->
+          <circle cx="737" cy="225" r="155" fill="var(--horizon)" />
+          <g class="cloud-one" fill="var(--cloud)">
+            <path d="M207 147c0-12 10-22 23-22 5-18 20-28 37-25 12 2 22 10 25 22 18-3 32 10 32 25H207Z" />
+            <path d="M354 198c0-7 6-13 13-13 3-10 13-17 24-15 8 1 13 7 15 14 10-1 18 6 18 14h-70Z" />
+          </g>
+          <g class="cloud-two" fill="var(--cloud)">
+            <path d="M867 143c0-9 8-17 18-17 4-14 17-22 31-19 9 2 17 9 19 18 14-2 25 7 25 18h-93Z" />
+          </g>
+
+          <!-- Ground and the buildings already taking shape. -->
+          <ellipse cx="586" cy="385" rx="343" ry="10" fill="var(--horizon)" />
+          <path d="M143 378h815" stroke="var(--ground)" stroke-width="1.5" stroke-linecap="round" />
+          <path d="M116 378h13m847 0h20" stroke="var(--ground)" stroke-width="1.5" stroke-linecap="round" />
+
+          <path d="M272 321l25-13h93v70H272v-57Z" fill="var(--building)" />
+          <path d="M390 321l22-13v70h-22v-57Z" fill="var(--building-side)" />
+          <path d="M272 321l22-13h118l-22 13H272Z" fill="var(--building-top)" />
+          <path d="M287 329h91v42h-91z" fill="url(#small-windows)" />
+
+          <path d="M419 282h163v96H419z" fill="var(--building)" />
+          <path d="M582 282l25-15v111h-25v-96Z" fill="var(--building-side)" />
+          <path d="M419 282l25-15h163l-25 15H419Z" fill="var(--building-top)" />
+          <path d="M432 299h136v73H432z" fill="url(#building-windows)" />
+          <path d="M419 291h163" stroke="var(--building-side)" stroke-width="2" />
+          <path d="M421 280v-31m39 31v-31m40 31v-31m40 31v-31m40 31v-31M421 250h159" stroke="var(--window-dark)" stroke-width="2.5" stroke-linecap="round" />
+          <path d="M426 269h149" stroke="var(--building-side)" stroke-width="2" />
+
+          <!-- The crane's fixed structure and latticework. -->
+          <path d="M753 365h48l13 13h-74l13-13Z" fill="var(--building-side)" />
+          <path d="M762 101h27v264h-27z" fill="var(--crane)" fill-opacity="0.2" />
+          <path d="M762 101v264m27-264v264" stroke="var(--crane-edge)" stroke-width="3" />
+          <path d="m762 106 27 32h-27l27 32h-27l27 32h-27l27 32h-27l27 32h-27l27 32h-27l27 32h-27l27 32h-27" stroke="var(--crane)" stroke-width="2" stroke-linejoin="round" />
+          <path d="M757 361h37v5h-37z" fill="var(--crane-edge)" />
+
+          <path d="M776 37 358 84m418-47 167 47" stroke="var(--crane-edge)" stroke-width="1.5" />
+          <path d="M765 82V38l11-15 11 15v44" stroke="var(--crane-edge)" stroke-width="3" stroke-linejoin="round" />
+          <path d="m765 40 22 21m-22 0 22-21" stroke="var(--crane)" stroke-width="2" />
+          <path d="M358 84h588v25H358z" fill="var(--crane)" fill-opacity="0.16" />
+          <path d="M358 84h588v25H358z" stroke="var(--crane-edge)" stroke-width="2.5" stroke-linejoin="round" />
+          <path d="m358 109 29-25 29 25 29-25 29 25 29-25 29 25 29-25 29 25 29-25 29 25 29-25 29 25 29-25 29 25 29-25 29 25 29-25 29 25 29-25 8 7" stroke="var(--crane)" stroke-width="2" stroke-linejoin="round" />
+          <path d="M358 83h588" stroke="var(--crane-light)" stroke-width="2" />
+          <path d="M900 110h39v37h-39z" fill="var(--crane)" />
+          <path d="M919 110v37" stroke="var(--crane-edge)" stroke-width="1.5" />
+          <path d="M900 147h39" stroke="var(--crane-edge)" stroke-width="2" />
+
+          <!-- Operator cabin. -->
+          <path d="M734 112h31v28h-31z" fill="var(--crane)" />
+          <path d="M738 116h23v15h-23z" fill="var(--paper)" fill-opacity="0.8" />
+          <path d="M750 116v15" stroke="var(--crane-edge)" stroke-width="1.5" />
+          <path d="M730 141h39" stroke="var(--crane-edge)" stroke-width="2" />
+
+          <!-- Trolley, hoist, and load share an eighteen-second cycle. -->
+          <g class="trolley">
+            <path d="M618 109h24v8h-24z" fill="var(--crane-edge)" />
+            <circle cx="621" cy="109" r="3" fill="var(--crane-edge)" />
+            <circle cx="639" cy="109" r="3" fill="var(--crane-edge)" />
+            <path class="hoist-cable" d="M630 116v128" stroke="var(--crane-edge)" stroke-width="1.5" />
+            <g class="hoist-load">
+              <g class="load-sway">
+                <rect x="626" y="242" width="8" height="10" rx="3" fill="var(--crane-edge)" />
+                <path d="M630 251v5a5 5 0 1 1-5 5" stroke="var(--crane-edge)" stroke-width="2" stroke-linecap="round" />
+                <path d="m629 264-39 23m39-23 41 23" stroke="var(--crane-edge)" stroke-width="1.5" />
+                <path d="M585 287h77v39h-77z" fill="var(--load)" />
+                <path d="m662 287 14-9v39l-14 9v-39Z" fill="var(--load-side)" />
+                <path d="m585 287 14-9h77l-14 9h-77Z" fill="var(--load-top)" />
+                <path d="M612 287v39m24-39v39" stroke="var(--load-side)" stroke-width="1.5" />
+                <path d="m612 287 14-9m10 9 14-9" stroke="var(--load-side)" stroke-width="1.5" />
+              </g>
+            </g>
+          </g>
+
+          <!-- Small human-scale details soften the architectural drawing. -->
+          <path d="M656 363h48v7h-48zM661 354h48v7h-48zM656 372h48v6h-48z" fill="var(--building-side)" />
+          <path d="M662 364h34m-29-9h34m-39 18h34" stroke="var(--window-dark)" stroke-width="1.5" />
+          <path d="m233 350-10 25h20l-10-25Z" fill="var(--crane)" />
+          <path d="M229 361h8m-11 7h14" stroke="var(--paper)" stroke-width="3" />
+          <path d="M219 376h28" stroke="var(--crane-edge)" stroke-width="3" stroke-linecap="round" />
+
+          <g class="plant-sway">
+            <path d="M868 377v-43m0 31-13-13m13 4 14-15" stroke="var(--leaf-dark)" stroke-width="2" stroke-linecap="round" />
+            <path d="M868 342c-14-5-15-19-9-28 12 4 17 16 9 28Z" fill="var(--leaf)" />
+            <path d="M858 357c-13 2-21-7-21-17 12-2 23 5 21 17Z" fill="var(--leaf-dark)" />
+            <path d="M874 350c-1-13 9-22 20-21 1 12-7 22-20 21Z" fill="var(--leaf)" />
+          </g>
+          <path d="m860 367 3 11h12l3-11h-18Z" fill="var(--building-side)" />
+          <path d="M185 377c1-6 5-10 11-10 0-9 6-16 13-16 8 0 13 7 13 16 6 0 10 4 11 10h-48Z" fill="var(--leaf)" />
+          <path d="M909 377c1-6 5-9 10-9 1-7 5-12 11-12 7 0 12 6 12 12 5 0 9 3 10 9h-43Z" fill="var(--leaf-dark)" />
+          <path d="m334 388 13 1m395 5h20" stroke="var(--ground)" stroke-width="1.5" stroke-linecap="round" />
+        </svg>
+      </figure>
+    </main>
+
+    <button class="motion-control" type="button" aria-label="Pause animation" hidden>
+      <svg class="pause-icon" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+        <path d="M5.5 4v8m5-8v8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+      </svg>
+      <svg class="play-icon" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+        <path d="m5.5 3.5 7 4.5-7 4.5v-9Z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round" />
+      </svg>
+    </button>
+
+    <script>
+      // The page follows the system theme through CSS; JavaScript only controls motion.
+      const motionPreference = window.matchMedia("(prefers-reduced-motion: reduce)");
+      const motionButton = document.querySelector(".motion-control");
+      let userPaused = false;
+
+      function updateMotion() {
+        const paused = motionPreference.matches || userPaused;
+        document.documentElement.dataset.motion = paused ? "paused" : "running";
+        motionButton.hidden = motionPreference.matches;
+        motionButton.setAttribute("aria-label", paused ? "Resume animation" : "Pause animation");
+      }
+
+      motionButton.addEventListener("click", () => {
+        userPaused = !userPaused;
+        updateMotion();
+      });
+
+      motionPreference.addEventListener("change", updateMotion);
+      updateMotion();
+    </script>
+  </body>
+</html>

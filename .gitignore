@@ -1,0 +1,9 @@
+# Local JetBrains IDE settings
+/.idea/
+
+# Generated browser previews and debugging artifacts
+/.playwright-cli/
+/output/playwright/
+
+# macOS metadata
+.DS_Store
